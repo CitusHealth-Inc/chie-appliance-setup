@@ -7,6 +7,7 @@ title() {
 
 title "Install Python and Ansible"
 sudo yum -y install epel-release
+sudo yum -y install python3-devel
 sudo yum  install -y curl wget ansible git make
 title "Install roles from Ansible Galaxy"
 sudo ansible-galaxy install viasite-ansible.zsh
