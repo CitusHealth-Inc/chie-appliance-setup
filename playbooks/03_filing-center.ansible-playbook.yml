@@ -41,28 +41,6 @@
     - name: Add Filing Center users into davfs2 group
       user: name={{ item.fstab_uid }} groups=davfs2 append=yes
       with_items: "{{ filing_centers }}"
-
-   
-
-  roles:
-    - bertvv.samba
-
-  post_tasks:
-    - name: Open Samba ports
-      ufw: >
-        rule=allow
-        port={{ item }}
-        proto=tcp
-      with_items:
-        - 139
-        - 445
-
-    - name: Create symlink to samba log file so the FC user can review logs
-      file: 
-        state: link
-        src: "{{ samba_log }}" 
-        dest: "/home/{{ appliance_filing_center_user }}/samba.log" 
-
     - name: Create symlink to davfs2 mount point (usually from home directory of user)
       file: 
         state: link
